@@ -11,6 +11,10 @@ public:
 	int getSimilarityLengthScore(string firstStr, string secondStr) {
 		return sc.getLengthScore(firstStr, secondStr);
 	}
+
+	int getSimilarityAlphabetScore(string firstStr, string secondStr) {
+		return sc.getSimilarityAlphabetScore(firstStr, secondStr);
+	}
 };
 
 TEST_F(SimilarityFixture, TC1) {
@@ -37,6 +41,11 @@ TEST_F(SimilarityFixture, TC4) {
 	EXPECT_EQ(0, actual);
 }
 
+TEST_F(SimilarityFixture, TC5) {
+	int actual = getSimilarityAlphabetScore("ASD", "DSA");
+
+	EXPECT_EQ(40, actual);
+}
 
 int main()
 {

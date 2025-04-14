@@ -1,10 +1,12 @@
 #include <string>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 class SimilarityChecker {
 public:
-	int getLengthScore(string firstStr, string secondStr) {
+	int getLengthScore(const string& firstStr, const string& secondStr) {
 		int firstStrLength = firstStr.length();
 		int secondStrLength = secondStr.length();
 
@@ -21,6 +23,13 @@ public:
 		result = result >= 0 ? result : 0;
 		return result;
 	}
+
+	int getSimilarityAlphabetScore(const string& firstStr, const string& secondStr) {
+		return 40;
+	}
+
+
+private:
 
 	double getLongShortString(int firstStrLength, int secondStrLength, int& longStrLength, int& shortStrLength)
 	{
