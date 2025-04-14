@@ -13,7 +13,11 @@ public:
 	}
 
 	int getSimilarityAlphabetScore(string firstStr, string secondStr) {
-		return sc.getSimilarityAlphabetScore(firstStr, secondStr);
+		return sc.getAlphabetScore(firstStr, secondStr);
+	}
+
+	int getSimilarityTotalScore(string firstStr, string secondStr) {
+		return getSimilarityLengthScore(firstStr, secondStr) + getSimilarityAlphabetScore(firstStr, secondStr);
 	}
 };
 
@@ -63,6 +67,25 @@ TEST_F(SimilarityFixture, GetAlphabetScore4) {
 	int actual = getSimilarityAlphabetScore("AA", "AAE");
 
 	EXPECT_EQ(20, actual);
+}
+
+
+TEST_F(SimilarityFixture, GetSimilarityScore1) {
+	int actual = getSimilarityTotalScore("ABCDE", "ABCDE");
+
+	EXPECT_EQ(100, actual);
+}
+
+TEST_F(SimilarityFixture, GetSimilarityScore2) {
+	int actual = getSimilarityTotalScore("ABCDE", "FG");
+
+	EXPECT_EQ(0, actual);
+}
+
+TEST_F(SimilarityFixture, GetSimilarityScore3) {
+	int actual = getSimilarityTotalScore("AA", "AAE");
+
+	EXPECT_EQ(50, actual);
 }
 
 int main()

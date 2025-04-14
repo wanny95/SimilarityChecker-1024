@@ -8,7 +8,11 @@ using std::set;
 
 class SimilarityChecker {
 public:
-	int getLengthScore(const string& firstStr, const string& secondStr) {
+	int getSimilarityScore(const string& firstStr, const string& secondStr) const {
+		return getLengthScore(firstStr, secondStr) + getAlphabetScore(firstStr, secondStr);
+	}
+
+	int getLengthScore(const string& firstStr, const string& secondStr) const {
 		int firstStrLength = firstStr.length();
 		int secondStrLength = secondStr.length();
 
@@ -26,7 +30,7 @@ public:
 		return result;
 	}
 
-	int getSimilarityAlphabetScore(const string& firstStr, const string& secondStr) {
+	int getAlphabetScore(const string& firstStr, const string& secondStr) const {
 		set<char> firstStringSet = getUniqueSet(firstStr);
 		set<char> secondStringSet = getUniqueSet(secondStr);
 
@@ -43,7 +47,7 @@ public:
 	}
 
 private:
-	double getLongShortString(int firstStrLength, int secondStrLength, int& longStrLength, int& shortStrLength)
+	double getLongShortString(int firstStrLength, int secondStrLength, int& longStrLength, int& shortStrLength) const
 	{
 		double gap = 0;
 		if (firstStrLength >= secondStrLength) {
@@ -59,7 +63,7 @@ private:
 		return gap;
 	}
 
-	set<char> getUniqueSet(const string& firstStr) {
+	set<char> getUniqueSet(const string& firstStr) const {
 		set<char> stringSet;
 
 		for (auto ch : firstStr) {
@@ -69,7 +73,7 @@ private:
 		return stringSet;
 	}
 
-	set<char> getTotalAlphabetSet(const set<char>& firstStrSet, const set<char>& secondStrSet) {
+	set<char> getTotalAlphabetSet(const set<char>& firstStrSet, const set<char>& secondStrSet) const {
 		set<char> totalStringSet = firstStrSet;
 		totalStringSet.insert(secondStrSet.begin(), secondStrSet.end());
 		return totalStringSet;
