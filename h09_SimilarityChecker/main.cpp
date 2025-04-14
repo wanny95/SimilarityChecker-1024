@@ -53,6 +53,18 @@ TEST_F(SimilarityFixture, GetAlphabetScore2) {
 	EXPECT_EQ(0, actual);
 }
 
+TEST_F(SimilarityFixture, GetAlphabetScore3) {
+	int actual = getSimilarityAlphabetScore("AAABB", "BA");
+
+	EXPECT_EQ(40, actual);
+}
+
+TEST_F(SimilarityFixture, GetAlphabetScore4) {
+	int actual = getSimilarityAlphabetScore("AA", "AAE");
+
+	EXPECT_EQ(20, actual);
+}
+
 int main()
 {
 	::testing::InitGoogleMock();

@@ -1,8 +1,10 @@
 #include <string>
 #include <vector>
+#include <set>
 
 using std::string;
 using std::vector;
+using std::set;
 
 class SimilarityChecker {
 public:
@@ -25,13 +27,22 @@ public:
 	}
 
 	int getSimilarityAlphabetScore(const string& firstStr, const string& secondStr) {
-		if (firstStr == "A" && secondStr == "BB") return 0;
-		return 40;
+		set<char> firstStringSet = getUniqueSet(firstStr);
+		set<char> secondStringSet = getUniqueSet(secondStr);
+
+		set<char> totalStringSet = getTotalAlphabetSet(firstStringSet, secondStringSet);
+
+		int totalCount = totalStringSet.size();
+		int sameCount = 0;
+
+		for (char ch : firstStringSet) {
+			if (secondStringSet.count(ch) > 0) ++sameCount;
+		}
+
+		return ((double)(sameCount)) / totalCount * 40;
 	}
 
-
 private:
-
 	double getLongShortString(int firstStrLength, int secondStrLength, int& longStrLength, int& shortStrLength)
 	{
 		double gap = 0;
@@ -46,5 +57,21 @@ private:
 			shortStrLength = firstStrLength;
 		}
 		return gap;
+	}
+
+	set<char> getUniqueSet(const string& firstStr) {
+		set<char> stringSet;
+
+		for (auto ch : firstStr) {
+			stringSet.insert(ch);
+		}
+
+		return stringSet;
+	}
+
+	set<char> getTotalAlphabetSet(const set<char>& firstStrSet, const set<char>& secondStrSet) {
+		set<char> totalStringSet = firstStrSet;
+		totalStringSet.insert(secondStrSet.begin(), secondStrSet.end());
+		return totalStringSet;
 	}
 };
